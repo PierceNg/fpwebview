@@ -17,7 +17,9 @@ procedure SayHello(const seq: PAnsiChar; const req: PAnsiChar; arg: Pointer); cd
 var
   s: String;
 begin
-  s := 'console.log("\nPascal calling back Javascript in Javascript-to-Pascal call ID ' + seq + '")';
+  s := 'var p = document.createElement("p")' + LineEnding +
+    'p.innerHTML = "Yo again!"' + LineEnding +
+    'document.body.appendChild(p)';
   webview_eval(w, PAnsiChar(s));
   webview_return(w, seq, WebView_Return_Ok, '{result: "<p>Yo!</p>"}');
 end;
