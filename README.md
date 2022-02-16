@@ -4,7 +4,7 @@
 
 ## Demo
 
-```
+```pascal
 program browser_cli;
 
 {$linklib libwebview}
@@ -82,5 +82,7 @@ The demo program ```browser_cli``` implements a web browser that opens to
 the Free Pascal website.
 
 Demos planned:
-- Bi-directional Pascal-Javascript calls
+- ~~Bi-directional Pascal-Javascript calls~~
+- i18n
+- embedded webserver
 
