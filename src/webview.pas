@@ -13,6 +13,7 @@ interface
 type
   PWebView = Pointer;
   TWebViewDispatchProc = procedure(w: PWebView; arg: Pointer); cdecl;
+  TWebViewBindProc = procedure(const seq: PAnsiChar; const req: PAnsiChar; arg: Pointer); cdecl;
 
 const
 {$ifdef mswindows}
@@ -33,15 +34,22 @@ const
   WebView_Hint_Min = 1;
   WebView_Hint_Max = 2;
   WebView_Hint_Fixed = 3;
+  WebView_Return_Ok = 0;
+  WebView_Return_Error = 1;
 
 function webview_create(debug: Integer; window: Pointer): PWebView; cdecl; external webview_lib;
 procedure webview_destroy(w: PWebView); cdecl; external webview_lib;
-procedure webview_set_size(w: PWebView; width, height, hints: Integer); cdecl; external webview_lib;
-procedure webview_set_title(w: PWebView; const title: PAnsiChar); cdecl; external webview_lib;
-procedure webview_navigate(w: PWebView; const url: PAnsiChar); cdecl; external webview_lib;
-procedure webview_dispatch(w: PWebView; fn: TWebViewDispatchProc; arg: Pointer); cdecl; external webview_lib;
 procedure webview_run(w: PWebView); cdecl; external webview_lib;
 procedure webview_terminate(w: PWebView); cdecl; external webview_lib;
+procedure webview_dispatch(w: PWebView; fn: TWebViewDispatchProc; arg: Pointer); cdecl; external webview_lib;
+function webview_get_window(w: PWebView): Pointer; cdecl; external webview_lib;
+procedure webview_set_title(w: PWebView; const title: PAnsiChar); cdecl; external webview_lib;
+procedure webview_set_size(w: PWebView; width, height, hints: Integer); cdecl; external webview_lib;
+procedure webview_navigate(w: PWebView; const url: PAnsiChar); cdecl; external webview_lib;
+procedure webview_init(w: PWebView; const js: PAnsiChar); cdecl; external webview_lib;
+procedure webview_eval(w: PWebView; const js: PAnsiChar); cdecl; external webview_lib;
+procedure webview_bind(w: PWebView; const name: PAnsiChar; fn: TWebViewBindProc; arg: Pointer); cdecl; external webview_lib;
+procedure webview_return(w: PWebView; const seq: PAnsiChar; status: Integer; const result: PAnsiChar); cdecl; external webview_lib;
 
 implementation
 
