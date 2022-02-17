@@ -11,7 +11,7 @@ unit webview;
 interface
 
 type
-  PWebView = Pointer;
+  PWebView = type Pointer;
   TWebViewDispatchProc = procedure(w: PWebView; arg: Pointer); cdecl;
   TWebViewBindProc = procedure(const seq: PAnsiChar; const req: PAnsiChar; arg: Pointer); cdecl;
 
