@@ -1,6 +1,7 @@
 program servcli;
 
 {$ifdef darwin}{$linklib libwebview}{$endif}
+{$ifdef mswindows}{$linklib libwebview}{$endif}
 {$mode objfpc}{$H+}
 
 {$macro on}
@@ -67,7 +68,7 @@ begin
   TWebServerThread.Create(false);
 
   w := webview_create(WebView_DevTools, nil);
-  webview_set_size(w, 1024, 768, WebView_Hint_Fixed);
+  webview_set_size(w, 1280, 720, WebView_Hint_None);
   webview_set_title(w, PAnsiChar('fpwebview - Embedded Web Server Demo'));
   webview_bind(w, PAnsiChar('HostSayHello'), @SayHello, nil);
   webview_bind(w, PAnsiChar('HostExit'), @AppExit, nil);
