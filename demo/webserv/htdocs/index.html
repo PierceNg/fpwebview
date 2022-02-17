@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="/css/bulma.min.css"/></head>
+    <body>
+        <nav class="navbar has-background-info">
+            <div class="navbar-brand">
+                <div class="navbar-item is-size-2">
+                    <strong class="has-text-white">fpwebview</strong>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero is-small">
+            <div class="hero-body">
+                <p class="title">Embedded Web Server Demo</p>
+                <p class="subtitle ml-1">with Javascript &harr; Pascal in-process RPC</p>
+            </div>
+        </section>
+
+        <div class="columns is-mobile">
+            <div class="column is-two-thirds">
+                <div class="card ml-4">
+                    <header class="card-header">
+                        <p class="card-header-title">Architecture</p>
+                    </header>
+                    <div class="card-content">
+                        <p class="pb-4">
+                        This program has two main pieces: a multi-threaded web server listening on 
+                        <code>
+                            localhost:8000
+                        </code>
+                        and this web browser widget that has loaded this content and CSS from said web server.
+                        </p>
+        
+                        <p class="pb-4">
+                        This program's Pascal procedure 
+                        <code>SayHello</code> 
+                        has been made accessible to
+                        Javascript as 
+                        <code>HostSayHello</code>
+                        . When you click on 
+                        <code>Say Hello</code>
+                        in the demo area, Javascript calls 
+                        <code>HostSayHello</code> 
+                        , which calls 
+                        <code>SayHello</code> 
+                        ; the Pascal code in turns calls back Javascript to update the DOM, and also returns
+                        a response to the Javascript caller. Similarly, the
+                        <code>Exit Program</code> 
+                        button calls into Pascal to terminate this program.
+                        </p>
+        
+                        <p class="pb-4">Because the web server is listening on 
+                        <code>
+                            localhost:8000
+                        </code>
+                        , you could visit it with a regular web browser. However, there, clicking on 
+                        <code>Say Hello</code>
+                        and
+                        <code>Exit Program</code>
+                        will have no effect, because your regular web browser's Javascript runtime has nothing to do
+                        with the Pascal procedures implementing the buttons' functionalities.
+                        </p>
+                    </div>
+                </div>
+                <div class="ml-4 mt-4">
+                    <button class="button is-primary" onClick="HostExit()">Exit Program</button>
+                </div>
+            </div> <!-- columnn -->
+            <div class="column is-one-third">
+                <nav class="panel mr-4">
+                    <p class="panel-heading">Demo Area</p>
+                    <div class="panel-block">
+                        <div>
+                          <button class="button is-primary-light" onClick="SayHello()">Say Hello</button>
+                        </div>
+                    </div>
+                    <div class="panel-block">
+                        <div id="demo-content">
+                            <div id="greeting"></div>
+                        </div>
+                    </div>
+                </nav>
+            </div> <!-- columnn -->
+        </div> <!-- columnns -->
+
+        <script>
+            var SayHello = function() {
+                 HostSayHello().then((x) => document.getElementById("greeting").innerHTML = x.result)
+            }
+        </script>
+    </body>
+</html>
