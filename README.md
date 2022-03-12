@@ -1,41 +1,23 @@
 # fpwebview
 
-*fpwebview* is Free Pascal binding for [webview](https://github.com/webview/webview).
+*fpwebview* is Free Pascal binding for [webview](https://github.com/webview/webview),
+a tiny cross-platform library for building modern cross-platform GUIs using web technology.
+fpwebview supports two-way Javascript-Pascal bindings: calling Pascal from Javascript,
+and calling Javascript from Pascal.
 
-## Demo
+## Demos
 
-```pascal
-program browser_cli;
+- [simple web browser opening to a specific web site](/demo/browser_cli)
+- [invoking Javascript from Pascal](/demo/js_eval)
+- [bidirectional Javascript-Pascal calling](/demo/js_bidir)
+- [embedded web server serving](/demo/webserv)
 
-{$linklib libwebview}
-
-uses
-  {$ifdef unix}cthreads,{$endif}
-  math,
-  webview;
-
-var
-  w: PWebView;
-
-begin
-  { Set math masks. libwebview throws at least one of these from somewhere deep inside. }
-  SetExceptionMask([exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision]);
-
-  writeln('Hello, webview, from Pascal!');
-  w := webview_create(WebView_DevTools, nil);
-  webview_set_size(w, 1024, 768, WebView_Hint_None);
-  webview_set_title(w, PAnsiChar('WebView Free Pascal'));
-  webview_navigate(w, PAnsiChar('https://www.freepascal.org/'));
-  webview_run(w);
-  webview_destroy(w);
-  writeln('Goodbye, webview.');
-end.
-```
+![fpwebview GUI](/screenshot/fpwv_embeddedserver_gui.png?raw=true "fpwebview GUI")
 
 ## Getting Started
 
 Binary support files for x86_64 for Linux, macOS and Windows are provided
-with this repo. See the files in the ```dll/x86_64``` folder.
+with this repo. See the files in the [```/dll/x86_64```](/dll/x86_64) folder.
 
 ### Linux
 
@@ -67,22 +49,9 @@ C:\fpwebview\demo\browser_cli> winbuild.bat
 C:\fpwebview\demo\browser_cli> winrun.bat
 ```
 
-## Licenses
+## Copyright and License
 
-This repo is under MIT license, with following exceptions:
-
-- The source file(s) that make up the ```webview``` Pascal unit are licensed under MPLv2. 
+Copyright (c) 2022 Pierce Ng. This repo is under MIT license, except for the following:
 
 - Microsoft's ```WebView2Loader.dll``` is distributed as per ```LICENSE.Microsoft```.
-
-
-## Further Work
-
-The demo program ```browser_cli``` implements a web browser that opens to
-the Free Pascal website.
-
-Demos planned:
-- ~~Bi-directional Pascal-Javascript calls~~
-- i18n
-- embedded webserver
 
