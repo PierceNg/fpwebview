@@ -10,7 +10,7 @@ and calling Javascript from Pascal.
 - [simple web browser opening to a specific web site](/demo/browser_cli)
 - [invoking Javascript from Pascal](/demo/js_eval)
 - [bidirectional Javascript-Pascal calling](/demo/js_bidir)
-- [embedded web server serving](/demo/webserv)
+- [embedded web server](/demo/webserv)
 
 ![fpwebview GUI](/screenshot/fpwv_embeddedserver_gui.png?raw=true "fpwebview GUI")
 
