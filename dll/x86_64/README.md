@@ -16,12 +16,22 @@
 # SHA256 Checksums
 
 ```
-libwebview.so      = da97fef5a94d464db980016c2ebc4bd1d746697144c76f8a550145534cf234cf
-libwebview.dylib   = 8ed80056f4b7260982ecd3e8b07efab641b0436e84dfd103a6501fb6771ad6fe
+libwebview.so      = 6d62f7ce8c1aa0e5ee5919615477f4811b3ff179a1d131121c6f5cf7cf15c677
+libwebview.dylib   = 84485be2dce0fed7becb307c989d2d8e2bc03cec7184dfdf3a387ced547886b0
 webview.dll        = 38c5bbd53dec54a873e47de2dfc49e672613e3a1982a1cfc31298e8b36cfcd11
 libwebview.a       = 13079a220bf2a5fdcce5a85c3d7b997979607abdead51c51cc166098b78c92b6
 libimpwebview.a    = 13079a220bf2a5fdcce5a85c3d7b997979607abdead51c51cc166098b78c92b6
 WebView2Loader.dll = 4a2fabb4c19ae3a505b0536f2b5b0d5176ff36abd617898ca0d547f6b82cfd58
 ```
+# webview Source
 
+The webview shared libraries are built from following:
+
+```
+commit 2ee04ccd0530e3928a872f5d508c114403803e61 (HEAD -> master, origin/master, origin/HEAD)
+Author: Steffen André Langnes <steffenl.sw@gmail.com>
+Date:   Tue Aug 16 23:19:28 2022 +0900
+
+    Document null return value for webview_create (#828)
+```
 
