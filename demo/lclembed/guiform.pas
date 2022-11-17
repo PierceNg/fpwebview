@@ -25,7 +25,7 @@ type
     BtnWebViewSayHello: TButton;
     BtnLazSayHello: TButton;
     BtnExitProgram: TButton;
-	  Timer1: TTimer;
+    Timer1: TTimer;
     procedure OnFormPaint(Sender: TObject);
     procedure OnFormResize(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
@@ -81,11 +81,6 @@ begin
     webview_set_size(wvHandle, WebPanel.ClientWidth, WebPanel.ClientHeight, WebView_Hint_Fixed);
 end;
 
-procedure TForm1.OnClickLazSayHello(Sender: TObject);
-begin
-  Forms.Application.MessageBox('This is Lazarus GUI component in action', 'fpwebview LCL Embedded Demo');
-end;
-
 procedure TForm1.OnFormShow(Sender: TObject);
 begin
   Timer1.Interval := 1000;
@@ -97,17 +92,6 @@ begin
   Timer1.Enabled := false;
   if not isExiting then
     CreateWebView;
-end;
-
-procedure TForm1.OnClickWebViewSayHello(Sender: TObject);
-const
-  s =
-    'var dc = document.getElementById("demo-content");' +
-    'var p = document.createElement("p");' +
-    'p.innerHTML = "Lazarus says \"Yo!\"";' +
-    'dc.appendChild(p);';
-begin
-  webview_eval(Form1.webviewHandle, PAnsiChar(s));
 end;
 
 procedure TForm1.OnClickExitProgram(Sender: TObject);
@@ -122,6 +106,22 @@ begin
   wvHandle := nil;
   WebPanel.Hide;
   Halt;
+end;
+
+procedure TForm1.OnClickLazSayHello(Sender: TObject);
+begin
+  Forms.Application.MessageBox('This is Lazarus GUI component in action', 'fpwebview LCL Embedded Demo');
+end;
+
+procedure TForm1.OnClickWebViewSayHello(Sender: TObject);
+const
+  s =
+    'var dc = document.getElementById("demo-content");' +
+    'var p = document.createElement("p");' +
+    'p.innerHTML = "Lazarus says \"Yo!\"";' +
+    'dc.appendChild(p);';
+begin
+  webview_eval(Form1.webviewHandle, PAnsiChar(s));
 end;
 
 procedure TForm1.CreateWebView;
