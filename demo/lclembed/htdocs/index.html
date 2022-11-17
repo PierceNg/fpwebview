@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="/css/bulma.min.css"/></head>
+    <body>
+        <nav class="navbar has-background-info">
+            <div class="navbar-brand">
+                <div class="navbar-item is-size-2">
+                    <strong class="has-text-white">fpwebview embedded in Lazarus GUI</strong>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero is-small">
+            <div class="hero-body">
+                <p class="title">
+                Lazarus GUI with Embedded Web Server<br /> 
+                and Embedded Web Browser Widget
+                </p>
+                <p class="subtitle ml-1">with Javascript &harr; Pascal in-process RPC</p>
+            </div>
+        </section>
+
+        <div class="columns is-mobile">
+            <div class="column is-two-thirds">
+                <div class="card ml-4">
+                    <header class="card-header">
+                        <p class="card-header-title">Architecture</p>
+                    </header>
+                    <div class="card-content">
+                        <p class="pb-4">
+                        This program has three main pieces: a multi-threaded web server listening on 
+                        <code>
+                            localhost:8000
+                        </code>
+                        ; this web browser widget that has loaded this content and CSS from said web server;
+                        with both web server and web browser widget embedded in a Lazarus desktop GUI application.
+                        </p>
+        
+                        <p class="pb-4">
+                        This program's Pascal procedure 
+                        <code>SayHello</code> 
+                        has been made accessible to Javascript as 
+                        <code>HostSayHello</code>
+                        . When you click on 
+                        <code>Say Hello</code>
+                        in the demo area, Javascript calls 
+                        <code>HostSayHello</code> 
+                        , which calls 
+                        <code>SayHello</code> 
+                        ; the Pascal code in turns calls back Javascript to update the DOM, and also returns
+                        a response to the Javascript caller. 
+                        </p>
+
+                        <p class="pb-4">Because the web server is listening on 
+                        <code>
+                            localhost:8000
+                        </code>
+                        , you could visit it with a regular web browser. However, there, clicking on 
+                        <code>Say Hello</code>
+                        and
+                        <code>Exit Program</code>
+                        will have no effect, because your regular web browser's Javascript runtime has nothing to do
+                        with the Pascal procedures implementing the buttons' functionalities.
+                        </p>
+
+                        <p class="pb-4">
+                        The three buttons above this web content are outside of the web browser widget and are part
+                        of the desktop application GUI. The
+                        <code>Say Yo To Webview</code>
+                        button is another demonstration of updating the web widget's content from Pascal. The
+                        <code>Lazarus Say Hello</code>
+                        button demonstrates using Lazarus GUI functionality. The 
+                        <code>Exit Program</code>
+                        button stops the web server, destroys this web browser widget, and terminates the application.
+                        </p> 
+                    </div>
+                </div>
+            </div> <!-- columnn -->
+            <div class="column is-one-third">
+                <nav class="panel mr-4">
+                    <p class="panel-heading">Demo Area</p>
+                    <div class="panel-block">
+                        <div>
+                          <button class="button is-primary-light" onClick="SayHello()">Say Hello</button>
+                        </div>
+                    </div>
+                    <div class="panel-block">
+                        <div id="demo-content">
+                            <div id="greeting"></div>
+                        </div>
+                    </div>
+                </nav>
+                <div><img src="/img/powered_by_002.png" alt="Powered by Free Pascal and Lazarus" /></div>
+            </div> <!-- columnn -->
+        </div> <!-- columnns -->
+
+        <script>
+            var SayHello = function() {
+              HostSayHello().then((x) => { 
+                var p = document.createElement("p")
+                p.innerHTML = x.result
+                document.getElementById("greeting").appendChild(p)
+              })
+            }
+        </script>
+    </body>
+</html>
