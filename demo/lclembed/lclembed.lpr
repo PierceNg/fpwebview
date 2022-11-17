@@ -1,10 +1,11 @@
 program lclembed;
 
 {$mode objfpc}{$H+}
+{$ifdef darwin}{$linklib libwebview}{$endif}
 {$ifdef mswindows}{$linklib libwebview}{$endif}
 
 uses
-  {$IFDEF UNIX}cthreads,{$ENDIF}
+  {$IFDEF UNIX}cmem, cthreads,{$ENDIF}
   Interfaces, Forms, math,
   classes, fphttpapp, fpwebfile,
   guiform;
@@ -12,9 +13,6 @@ uses
 {$R *.res}
 
 type
-  TWebApplication = class(THTTPApplication)
-  end;
-
   TWebServerThread = class(TThread)
     protected
       procedure Execute; override;
