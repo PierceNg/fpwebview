@@ -25,7 +25,8 @@ WebView2Loader.dll = 4a2fabb4c19ae3a505b0536f2b5b0d5176ff36abd617898ca0d547f6b82
 ```
 # webview Source
 
-The webview shared libraries are built from following:
+The webview shared libraries are built from following, with a local fix for
+macOS (to be pushed upstream):
 
 ```
 commit 2ee04ccd0530e3928a872f5d508c114403803e61 (HEAD -> master, origin/master, origin/HEAD)
