@@ -11,8 +11,9 @@ and calling Javascript from Pascal.
 - [invoking Javascript from Pascal](/demo/js_eval)
 - [bidirectional Javascript-Pascal calling](/demo/js_bidir)
 - [embedded web server](/demo/webserv)
+- [LCL GUI embedding webview and web server](/demo/lclembed)
 
-![fpwebview GUI](/screenshot/fpwv_embeddedserver_gui.png?raw=true "fpwebview GUI")
+![LCL GUI embedding](/screenshot/cocoawebview.jpg?raw=true "fpwebview LCL GUI")
 
 ## Getting Started
 
