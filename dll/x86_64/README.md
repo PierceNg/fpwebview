@@ -4,7 +4,7 @@
 
 # macOS
 
-- ```libwebview.dylib``` built from source on macOS Catalina
+- ```libwebview.dylib``` built from source on macOS Monterey
 
 # Windows
 
@@ -17,7 +17,7 @@
 
 ```
 libwebview.so      = a9815c9c6460e69415358fd8be84c86e65686c9e8859a84f92999664036e0b0e
-libwebview.dylib   = 
+libwebview.dylib   = ca2da2ed56f70a5cbb823cc5ca182d76f5f63bcccac9eb3fa3034f14cd0bbc2f
 webview.dll        = 
 libwebview.a       = 
 libimpwebview.a    = 
