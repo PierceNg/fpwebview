@@ -4,7 +4,7 @@
 
 # macOS
 
-- ```libwebview.dylib``` built from source on macOS Catalina
+- ```libwebview.dylib``` built from source on macOS Monterey
 
 # Windows
 
