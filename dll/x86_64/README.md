@@ -16,23 +16,22 @@
 # SHA256 Checksums
 
 ```
-libwebview.so      = 6d62f7ce8c1aa0e5ee5919615477f4811b3ff179a1d131121c6f5cf7cf15c677
-libwebview.dylib   = edfc0cd547ef0b154bdbd413ba15097bc846035cbea2a2876e147eaba57f573c
-webview.dll        = 38c5bbd53dec54a873e47de2dfc49e672613e3a1982a1cfc31298e8b36cfcd11
-libwebview.a       = 13079a220bf2a5fdcce5a85c3d7b997979607abdead51c51cc166098b78c92b6
-libimpwebview.a    = 13079a220bf2a5fdcce5a85c3d7b997979607abdead51c51cc166098b78c92b6
-WebView2Loader.dll = 4a2fabb4c19ae3a505b0536f2b5b0d5176ff36abd617898ca0d547f6b82cfd58
+libwebview.so      = a9815c9c6460e69415358fd8be84c86e65686c9e8859a84f92999664036e0b0e
+libwebview.dylib   = 
+webview.dll        = 
+libwebview.a       = 
+libimpwebview.a    = 
+WebView2Loader.dll = 
 ```
 # webview Source
 
-The webview shared libraries are built from following, with a local fix for
-macOS (to be pushed upstream):
+The webview shared libraries are built from following:
 
 ```
-commit 2ee04ccd0530e3928a872f5d508c114403803e61 (HEAD -> master, origin/master, origin/HEAD)
-Author: Steffen André Langnes <steffenl.sw@gmail.com>
-Date:   Tue Aug 16 23:19:28 2022 +0900
+commit 7b40e46d97e953a426ff553f92f2cc901cbf8bf9 (HEAD -> master, origin/master, origin/HEAD)
+Author: Josias <me@josias.dev>
+Date:   Fri Feb 10 06:13:04 2023 +0000
 
-    Document null return value for webview_create (#828)
+    README.md typo Preperation -> Preparation (#905)
 ```
 
