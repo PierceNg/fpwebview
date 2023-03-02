@@ -1,6 +1,7 @@
 program js_bidir;
 
-{$linklib libwebview}
+{$ifdef darwin}{$linklib libwebview}{$endif}
+{$ifdef mswindows}{$linklib libimpwebview}{$endif}
 
 {$mode objfpc}{$H+}
 

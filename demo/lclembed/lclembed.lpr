@@ -1,8 +1,9 @@
 program lclembed;
 
-{$mode objfpc}{$H+}
 {$ifdef darwin}{$linklib libwebview}{$endif}
-{$ifdef mswindows}{$linklib libwebview}{$endif}
+{$ifdef mswindows}{$linklib libimpwebview}{$endif}
+
+{$mode objfpc}{$H+}
 
 uses
   {$IFDEF UNIX}cmem, cthreads,{$ENDIF}

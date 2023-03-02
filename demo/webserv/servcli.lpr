@@ -1,7 +1,8 @@
 program servcli;
 
+{$ifdef mswindows}{$linklib libimpwebview}{$endif}
 {$ifdef darwin}{$linklib libwebview}{$endif}
-{$ifdef mswindows}{$linklib libwebview}{$endif}
+
 {$mode objfpc}{$H+}
 
 {$macro on}
