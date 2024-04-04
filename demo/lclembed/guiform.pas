@@ -17,7 +17,7 @@ uses
 
 type
 
-	{ TForm1 }
+  { TForm1 }
 
   TForm1 = class(TForm)
     TopPanel: TPanel;
@@ -25,7 +25,7 @@ type
     BtnWebViewSayHello: TButton;
     BtnLazSayHello: TButton;
     BtnExitProgram: TButton;
-	  Timer1: TTimer;
+    Timer1: TTimer;
     procedure OnFormPaint(Sender: TObject);
     procedure OnFormResize(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
@@ -65,7 +65,7 @@ begin
   if Form1.webviewHandle <> nil then
     begin
       webview_eval(Form1.webviewHandle, PAnsiChar(s));
-      webview_return(Form1.webviewHandle, seq, WebView_Return_Ok, '{result: "<p>\"Yo!\" returned by Pascal</p>"}');
+      webview_return(Form1.webviewHandle, seq, WebView_Return_Ok, '{"result": "<p>\"Yo!\" returned by Pascal</p>"}');
     end;
 end;
 
@@ -165,10 +165,9 @@ begin
       webview_bind(wvHandle, PAnsiChar('HostSayHello'), @SayHello, nil);
       webview_navigate(wvHandle, PAnsiChar('http://localhost:8000/'));
       webview_run(wvHandle);
-		end
+    end
   else
-    // Use GUI dialog, not writeln.
-    writeln('Failed to create webview object.');
+    ShowMessage('webview creation failed, program will not work correctly.');
 end;
 
 procedure TForm1.UpdateWebViewWindow;
@@ -178,7 +177,7 @@ begin
     begin
       wvWin.setStyleMask(wvWinMask);
       wvWin.setFrameOrigin(mainWC.window.frame.origin);
-		end;
+    end;
   {$endif}
 end;
 
