@@ -22,7 +22,7 @@ begin
     'p.innerHTML = "Yo again!"' + LineEnding +
     'document.body.appendChild(p)';
   webview_eval(w, PAnsiChar(s));
-  webview_return(w, seq, WebView_Return_Ok, '{result: "<p>Yo!</p>"}');
+  webview_return(w, seq, WebView_Return_Ok, '{"result": "<p>Yo!</p>"}');
 end;
 
 begin
