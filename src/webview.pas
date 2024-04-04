@@ -53,12 +53,16 @@ const
   WebView_Return_Ok = 0;
   WebView_Return_Error = 1;
 
+type
+  WebViewNativeHandleKind = (UI_Window, UI_Widget, Browser_Controller);
+
 function webview_create(debug: Integer; window: Pointer): PWebView; cdecl; external webview_lib;
 procedure webview_destroy(w: PWebView); cdecl; external webview_lib;
 procedure webview_run(w: PWebView); cdecl; external webview_lib;
 procedure webview_terminate(w: PWebView); cdecl; external webview_lib;
 procedure webview_dispatch(w: PWebView; fn: TWebViewDispatchProc; arg: Pointer); cdecl; external webview_lib;
 function webview_get_window(w: PWebView): Pointer; cdecl; external webview_lib;
+function webview_get_native_handle(w: PWebView; kind: WebViewNativeHandleKind): Pointer; cdecl; external webview_lib;
 procedure webview_set_title(w: PWebView; const title: PAnsiChar); cdecl; external webview_lib;
 procedure webview_set_size(w: PWebView; width, height, hints: Integer); cdecl; external webview_lib;
 procedure webview_navigate(w: PWebView; const url: PAnsiChar); cdecl; external webview_lib;
