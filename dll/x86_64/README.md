@@ -16,7 +16,7 @@
 
 ```
 libwebview.so      = 7eeb775ce9050c7c506d41e697d128ce77a88f4949f7418e93f22788ec166b7f
-libwebview.dylib   = 
+libwebview.dylib   = c33a74fe4b1aa9627e3c67a90ba98d4f9be1352956e4c7487f0079046222616a
 webview.dll        = 
 libwebview.a       = 
 libimpwebview.a    = 
