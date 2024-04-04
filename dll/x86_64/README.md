@@ -15,21 +15,22 @@
 # SHA256 Checksums
 
 ```
-libwebview.so      = a9815c9c6460e69415358fd8be84c86e65686c9e8859a84f92999664036e0b0e
-libwebview.dylib   = ca2da2ed56f70a5cbb823cc5ca182d76f5f63bcccac9eb3fa3034f14cd0bbc2f
-webview.dll        = 94b1b1c8093a9d0d2c2ca6a222328a19016fe381d9ddbcdb6b27f53381afa339
-libimpwebview.a    = 6a17eea32611ff3d5772a5309e8dd25383571a8bf4a57573eb0c3a88ea885f78
-WebView2Loader.dll = 24ce662f5e19393e2f8e56d1e62e6b2cacee158096d88d3596280922ec8c6d61
+libwebview.so      = 7eeb775ce9050c7c506d41e697d128ce77a88f4949f7418e93f22788ec166b7f
+libwebview.dylib   = 
+webview.dll        = 
+libwebview.a       = 
+libimpwebview.a    = 
+WebView2Loader.dll = 
 ```
 # webview Source
 
 The webview shared libraries are built from following:
 
 ```
-commit 7b40e46d97e953a426ff553f92f2cc901cbf8bf9 (HEAD -> master, origin/master, origin/HEAD)
-Author: Josias <me@josias.dev>
-Date:   Fri Feb 10 06:13:04 2023 +0000
+commit adbb85d0f54537b8034ece0bab67c7d1438e3cda (HEAD -> master, origin/master, origin/HEAD)
+Author: Steffen André Langnes <steffenl.sw@gmail.com>
+Date:   Tue Feb 27 18:36:11 2024 +0900
 
-    README.md typo Preperation -> Preparation (#905)
+    Default-construct basic_result<T, ...> with value (#1100)
 ```
 
