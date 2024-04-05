@@ -1,10 +1,14 @@
 # Linux
 
-Tested working on Ubuntu 20.04.
+This demo invoking `webview_eval` tested working on Ubuntu 20.04 with webview #7b40e46d9 (Feb 2023).
+
+As of webview #adbb85d0f (Feb 2024), `webview_eval` doesn't work for this demo; with `webview_init` 
+the demo works.
 
 # macOS
 
-Tested working on macOS Catalina.
+As of webview #adbb85d0f (Feb 2024), `webview_init` tested working for this demo on macOS Monterey x86_64
+and macOS Sonoma aarch64.
 
 # Windows 10
 

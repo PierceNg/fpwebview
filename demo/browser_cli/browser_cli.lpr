@@ -1,6 +1,7 @@
 program browser_cli;
 
-{$linklib libwebview}
+{$ifdef darwin}{$linklib libwebview}{$endif}
+{$ifdef mswindows}{$linklib libimpwebview}{$endif}
 
 uses
   {$ifdef unix}cthreads,{$endif}

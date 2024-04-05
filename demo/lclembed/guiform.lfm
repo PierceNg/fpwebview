@@ -1,22 +1,24 @@
 object Form1: TForm1
   Left = 165
-  Height = 604
+  Height = 761
   Top = 42
-  Width = 1152
+  Width = 1383
   Caption = 'fpwebview LCL Embedded Demo'
-  ClientHeight = 604
-  ClientWidth = 1152
+  ClientHeight = 761
+  ClientWidth = 1383
+  OnClose = OnFormClose
+  OnCreate = OnFormCreate
   OnPaint = OnFormPaint
   OnShow = OnFormShow
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '3.2.0.0'
   object TopPanel: TPanel
     Left = 0
     Height = 52
     Top = 0
-    Width = 1152
+    Width = 1383
     Align = alTop
     ClientHeight = 52
-    ClientWidth = 1152
+    ClientWidth = 1383
     TabOrder = 0
     object BtnWebViewSayHello: TButton
       Left = 19
@@ -24,8 +26,8 @@ object Form1: TForm1
       Top = 13
       Width = 128
       Caption = 'Say Yo To WebView'
-      OnClick = OnClickWebViewSayHello
       TabOrder = 0
+      OnClick = OnClickWebViewSayHello
     end
     object BtnLazSayHello: TButton
       Left = 160
@@ -33,8 +35,8 @@ object Form1: TForm1
       Top = 13
       Width = 128
       Caption = 'Lazarus Say Hello'
-      OnClick = OnClickLazSayHello
       TabOrder = 1
+      OnClick = OnClickLazSayHello
     end
     object BtnExitProgram: TButton
       Left = 417
@@ -42,19 +44,18 @@ object Form1: TForm1
       Top = 13
       Width = 128
       Caption = 'Exit Program'
-      OnClick = OnClickExitProgram
       TabOrder = 2
+      OnClick = OnClickExitProgram
     end
   end
   object WebPanel: TPanel
     Left = 0
-    Height = 552
+    Height = 709
     Top = 52
-    Width = 1152
+    Width = 1383
     Align = alClient
     Anchors = []
     TabOrder = 1
-    OnResize = OnFormResize
   end
   object Timer1: TTimer
     OnTimer = OnFormShowTimer

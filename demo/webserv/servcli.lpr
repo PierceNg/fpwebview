@@ -1,7 +1,8 @@
 program servcli;
 
+{$ifdef mswindows}{$linklib libimpwebview}{$endif}
 {$ifdef darwin}{$linklib libwebview}{$endif}
-{$ifdef mswindows}{$linklib libwebview}{$endif}
+
 {$mode objfpc}{$H+}
 
 {$macro on}
@@ -44,7 +45,7 @@ const
     'dc.appendChild(p)';
 begin
   webview_eval(w, PAnsiChar(s));
-  webview_return(w, seq, WebView_Return_Ok, '{result: "<p>\"Yo!\" returned by Pascal</p>"}');
+  webview_return(w, seq, WebView_Return_Ok, '{"result": "<p>\"Yo!\" returned by Pascal</p>"}');
 end;
 
 procedure AppExit(const seq: PAnsiChar; const req: PAnsiChar; arg: Pointer); cdecl;
