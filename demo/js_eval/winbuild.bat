@@ -1,6 +1,6 @@
 @echo off
 echo Building...
-copy "..\..\dll\x86_64\libimpwebview.a" .
+copy "..\..\dll\x86_64\webview.lib" .
 copy "..\..\dll\x86_64\webview.dll" .
 copy "..\..\dll\x86_64\WebView2Loader.dll" .
 fpc.exe -Twin64 -Px86_64 -Fu..\..\src -Fl. js_eval.lpr

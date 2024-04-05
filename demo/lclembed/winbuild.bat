@@ -1,6 +1,6 @@
 @echo off
 echo Building using lazbuild
-copy "..\..\dll\x86_64\libimpwebview.a" .
+copy "..\..\dll\x86_64\webview.lib" .
 copy "..\..\dll\x86_64\webview.dll" .
 copy "..\..\dll\x86_64\WebView2Loader.dll" .
 lazbuild.exe lclembed.lpi

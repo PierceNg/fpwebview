@@ -3,8 +3,7 @@ echo Cleaning...
 set FPWV_TARGET=js_eval
 del %FPWV_TARGET%.exe
 del %FPWV_TARGET%.o
-del libwebview.a
-del libimpwebview.a
+del webview.lib
 del webview.dll
 del WebView2Loader.dll
 del ..\..\src\webview.o
