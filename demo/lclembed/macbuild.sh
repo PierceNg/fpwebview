@@ -1,4 +1,4 @@
 #!/bin/sh
-cp -p ../../dll/x86_64/libwebview.dylib .
+cp -p ../../dll/`uname -m`/libwebview.dylib .
 lazbuild lclembed.lpi
 
