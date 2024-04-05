@@ -208,7 +208,9 @@ begin
     begin
       webview_bind(wvHandle, PAnsiChar('HostSayHello'), @SayHello, nil);
       webview_navigate(wvHandle, PAnsiChar('http://localhost:8000/'));
+      {$ifdef lclwin32}
       PostMessage(Form1.Handle, WM_APP_ACTIVATE, 0, 0);
+      {$endif}
       webview_run(wvHandle);
     end
   else
