@@ -9,16 +9,21 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  LCLType, fphttpapp,
+  LCLIntf, LCLType, fphttpapp,
   {$ifdef darwin}
     {$ifdef lclcocoa}CocoaAll, CocoaWindows,{$endif}
   {$endif}
+  {$ifdef lclwin32}
+  activex, windows,
+  {$endif}
   webview;
 
+{$ifdef lclwin32}
+const
+  WM_APP_ACTIVATE = WM_APP + 1;
+{$endif}
+
 type
-
-  { TForm1 }
-
   TForm1 = class(TForm)
     TopPanel: TPanel;
     WebPanel: TPanel;
@@ -26,8 +31,9 @@ type
     BtnLazSayHello: TButton;
     BtnExitProgram: TButton;
     Timer1: TTimer;
+    procedure OnFormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure OnFormCreate(Sender: TObject);
     procedure OnFormPaint(Sender: TObject);
-    procedure OnFormResize(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
     procedure OnFormShowTimer(Sender: TObject);
     procedure OnClickExitProgram(Sender: TObject);
@@ -44,15 +50,38 @@ type
     procedure CreateWebView;
     procedure UpdateWebViewWindow;
   public
-    property webviewHandle: PWebView read wvHandle;
+    property WebPanelControl: TPanel read WebPanel;
+    property WebviewHandle: PWebView read wvHandle;
   end;
 
 var
   Form1: TForm1;
+  {$ifdef lclwin32}
+  ProxiedWndProc: WNDPROC;
+  {$endif}
 
 implementation
 
 {$R *.lfm}
+
+{$ifdef lclwin32}
+function WebViewWndProc(aHwnd: HWND; uMsg: UInt; WParam: wParam; lParam: LParam): LRESULT; stdcall;
+var
+  r: RECTL;
+  aWindow: HWND;
+begin
+  case uMsg of
+    WM_APP_ACTIVATE, WM_SIZE:
+        if Form1.WebViewHandle <> nil then
+          begin
+            Windows.GetClientRect(Form1.WebPanelControl.Handle, @r);
+            aWindow := HWND(PtrUInt(webview_get_native_handle(Form1.WebViewHandle, UI_Widget)));
+            MoveWindow(aWindow, r.top, r.left, r.right-r.left, r.bottom-r.top, true);
+          end
+    end;
+  result := CallWindowProc(ProxiedWndProc, aHwnd, uMsg, wParam, lParam);
+end;
+{$endif}
 
 procedure SayHello(const seq: PAnsiChar; const req: PAnsiChar; arg: Pointer); cdecl;
 const
@@ -69,21 +98,31 @@ begin
     end;
 end;
 
+procedure TForm1.OnFormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  if CloseAction = caFree then
+    OnClickExitProgram(Sender);
+end;
+
+procedure TForm1.OnFormCreate(Sender: TObject);
+{$ifdef lclwin32}
+var
+  comInitStatus: HRESULT;
+{$endif}
+begin
+  {$ifdef lclwin32}
+  ProxiedWndProc := Windows.WNDPROC(SetWindowLongPtr(Self.Handle, GWL_WNDPROC, PtrUInt(@WebViewWndProc)));
+  CoUninitialize;
+  comInitStatus := CoInitializeEx(nil,  COINIT_APARTMENTTHREADED);
+  if (comInitStatus <> S_OK) and (comInitStatus <> S_FALSE) then
+    ShowMessage('webview COM init failed, program will not work correctly');
+  {$endif}
+end;
+
 procedure TForm1.OnFormPaint(Sender: TObject);
 begin
   {$ifdef lclcocoa}UpdateWebViewWindow;{$endif}
   {$ifdef lclwin32}Forms.Application.ProcessMessages;{$endif}
-end;
-
-procedure TForm1.OnFormResize(Sender: TObject);
-begin
-  if wvHandle <> nil then
-    webview_set_size(wvHandle, WebPanel.ClientWidth, WebPanel.ClientHeight, WebView_Hint_Fixed);
-end;
-
-procedure TForm1.OnClickLazSayHello(Sender: TObject);
-begin
-  Forms.Application.MessageBox('This is Lazarus GUI component in action', 'fpwebview LCL Embedded Demo');
 end;
 
 procedure TForm1.OnFormShow(Sender: TObject);
@@ -99,6 +138,25 @@ begin
     CreateWebView;
 end;
 
+procedure TForm1.OnClickExitProgram(Sender: TObject);
+begin
+  isExiting := true;
+  Sleep(500);
+  fphttpapp.Application.Terminate;
+  if wvHandle <> nil then
+    webview_destroy(wvHandle);
+  WebPanel.Hide;
+  {$ifdef lclwin32}
+  CoUninitialize;
+  {$endif}
+  Halt;
+end;
+
+procedure TForm1.OnClickLazSayHello(Sender: TObject);
+begin
+  Forms.Application.MessageBox('This is Lazarus GUI component in action', 'fpwebview LCL Embedded Demo');
+end;
+
 procedure TForm1.OnClickWebViewSayHello(Sender: TObject);
 const
   s =
@@ -107,21 +165,7 @@ const
     'p.innerHTML = "Lazarus says \"Yo!\"";' +
     'dc.appendChild(p);';
 begin
-  webview_eval(Form1.webviewHandle, PAnsiChar(s));
-end;
-
-procedure TForm1.OnClickExitProgram(Sender: TObject);
-begin
-  isExiting := true;
-  if wvHandle <> nil then
-    webview_terminate(wvHandle);
-  Sleep(500);
-  fphttpapp.Application.Terminate;
-  if wvHandle <> nil then
-    webview_destroy(wvHandle);
-  wvHandle := nil;
-  WebPanel.Hide;
-  Halt;
+  webview_eval(webviewHandle, PAnsiChar(s));
 end;
 
 procedure TForm1.CreateWebView;
@@ -164,6 +208,7 @@ begin
     begin
       webview_bind(wvHandle, PAnsiChar('HostSayHello'), @SayHello, nil);
       webview_navigate(wvHandle, PAnsiChar('http://localhost:8000/'));
+      PostMessage(Form1.Handle, WM_APP_ACTIVATE, 0, 0);
       webview_run(wvHandle);
     end
   else
