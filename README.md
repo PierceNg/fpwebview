@@ -17,8 +17,8 @@ and calling Javascript from Pascal.
 
 ## Getting Started
 
-Binary support files for x86_64 for Linux, macOS and Windows are provided
-with this repo. See the files in the [```/dll/x86_64```](/dll/x86_64) folder.
+Binary support files for x86_64 (Linux, macOS, Windows), i386 (Windows) and aarch64 (macOS)
+are provided with this repo. See the files in the [```/dll```](/dll) folder.
 
 ### Linux
 
