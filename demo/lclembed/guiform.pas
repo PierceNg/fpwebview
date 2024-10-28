@@ -24,6 +24,9 @@ const
 {$endif}
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
     TopPanel: TPanel;
     WebPanel: TPanel;
@@ -34,6 +37,7 @@ type
     procedure OnFormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure OnFormCreate(Sender: TObject);
     procedure OnFormPaint(Sender: TObject);
+    procedure OnFormResize(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
     procedure OnFormShowTimer(Sender: TObject);
     procedure OnClickExitProgram(Sender: TObject);
@@ -123,6 +127,15 @@ procedure TForm1.OnFormPaint(Sender: TObject);
 begin
   {$ifdef lclcocoa}UpdateWebViewWindow;{$endif}
   {$ifdef lclwin32}Forms.Application.ProcessMessages;{$endif}
+end;
+
+procedure TForm1.OnFormResize(Sender: TObject);
+begin
+  {$ifdef lclcocoa}
+  if wvHandle <> nil then
+    webview_set_size(wvHandle, WebPanel.ClientWidth, WebPanel.ClientHeight, WebView_Hint_Fixed);
+  UpdateWebViewWindow;
+  {$endif}
 end;
 
 procedure TForm1.OnFormShow(Sender: TObject);
