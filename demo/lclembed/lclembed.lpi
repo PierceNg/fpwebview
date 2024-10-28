@@ -55,6 +55,7 @@
       <OtherUnitFiles Value="..\..\src"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <Conditionals Value="if TargetOS='darwin' then CustomOptions := '-k-rpath -k@executable_path';"/>
     <Linking>
       <Options>
         <Win32>

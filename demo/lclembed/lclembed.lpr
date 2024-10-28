@@ -7,7 +7,7 @@ program lclembed;
 
 uses
   {$IFDEF UNIX}cmem, cthreads,{$ENDIF}
-  Interfaces, Forms, math,
+  Interfaces, Forms, math, sysutils,
   classes, fphttpapp, fpwebfile,
   guiform;
 
@@ -40,11 +40,15 @@ begin
   SetExceptionMask([exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision]);
 
   { Set up embedded webserver. }
+  {$ifdef lclcocoa}
+  currDir := ExtractFileDir(Forms.Application.ExeName);
+  {$else}
   GetDir(0, currDir);
+  {$endif}
   TSimpleFileModule.BaseDir := currDir + '/htdocs';
   TSimpleFileModule.RegisterDefaultRoute;
   TSimpleFileModule.IndexPageName := 'index.html';
-  MimeTypesFile := 'mime.types';
+  MimeTypesFile := currDir + '/mime.types';
   fphttpapp.Application.Port := 8000;
   fphttpapp.Application.Threaded := true;
   fphttpapp.Application.Initialize;
