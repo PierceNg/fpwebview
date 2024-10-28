@@ -5,7 +5,7 @@
 # SHA256 Checksums
 
 ```
-libwebview.dylib   = 846cd75199c7dc373bbd19754e515d7bf058e0c0de536108d0e4dfdf0b73026e
+libwebview.dylib   = 1da22382119872e83b0fcf6c0c5d80c044a1c4a3684db6c818475f03f09a72f5
 ```
 
 # webview Source
